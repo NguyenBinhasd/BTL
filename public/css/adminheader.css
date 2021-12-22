@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:"Poppins", sans-serif;
+}
+body {
+    min-height: 100vh;
+    background: #fff;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.navigation{
+    position: fixed;
+    top: 0px;
+    left:0px;
+    bottom:0px;
+    width: 70px;
+    border-radius:0 10px 10px 0;
+    box-sizing: initial;
+    border-left: 5px solid #D10024;
+    background: #D10024;
+    transition: width 0.5s;
+    overflow-x: hidden;
+}
+.navigation.active{
+    width: 300px;
+}
+.navigation ul{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 40px;
+}
+.navigation ul li{
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.navigation ul li.active{
+    background: #fff;
+}
+.navigation ul li b:nth-child(1){
+    position:absolute;
+    top:-20px;
+    height:20px;
+    width: 100%;
+    background: #fff;
+    display:none;
+}
+.navigation ul li b:nth-child(1)::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    border-bottom-right-radius: 20px;
+    background: #D10024;
+}
+.navigation ul li b:nth-child(2){
+    position:absolute;
+    bottom:-20px;
+    height:20px;
+    width: 100%;
+    background: #fff;
+    display:none;
+}
+.navigation ul li b:nth-child(2)::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    border-top-right-radius: 20px;
+    background: #D10024;
+}
+.navigation ul li.active b:nth-child(1),
+.navigation ul li.active b:nth-child(2)
+{
+    display:block;
+}
+.navigation ul li a{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+.navigation ul li.active a{
+    color: #333;
+}
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height:60px;
+    text-align: center;
+}
+.navigation ul li a .icon i{
+    font-size: 1.5em;
+}
+.navigation ul li a .title{
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height:60px;
+    line-height: 60px;
+    white-space: normal;
+}
+.toggle{
+    position: fixed;
+    top: 5px;
+    left:28px;
+    width: 25px;
+    height:25px;
+    background:#D10024;
+    border-radius: 10px;
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.toggle.active{
+    background: #D10024;
+}
+.toggle i{
+    position:absolute;
+    color:#fff;
+    font-size: 34px;
+    display:none;
+}
+.toggle i.open,
+.toggle.active i.close{
+    display:block;
+}
+.toggle.active i.open,
+.toggle i.close{
+    display: none;
+}
+
+.main{
+    margin-left: 75px;
+    width: 100%;
+    transition: all 0.5s;
+}
+.main.active{
+    margin-left: 305px;
+    width: 100%;
+}   
+.main{
+    display: flex;
+    align-items: space-between;
+    justify-content:space-between;
+    flex-direction: column;
+}
+.container-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.container-header{
+    margin-left: 135px;
+}
+.card{
+    height:200px;
+    width: 40%;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.container-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tb-p{
+    width: 80%;
+}
+.card-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+p{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+     display: -webkit-box;
+}
+form{
+    width: 80%;
+}
+table.align-middle td{
+    vertical-align: middle;
+}
+#imgPreview{
+    margin:20px;
+}
+.imgGallery{
+    object-fit: cover;
+    padding: 5px;
+    border: 1px solid #222;
+    border-radius: 10px;
+}
+#noimage{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+ul.gallery li {
+    display: inline-block;
+    list-style: none;
+}

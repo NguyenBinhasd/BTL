@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/adminheader.css">
+    <title>Admin Area</title>
+    <style>
+        .card{
+            height: 450px;
+        }
+        .container-content{
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            margin-left: 50px;
+        }
+        h4{
+            text-decoration: underline;
+            margin-top: 20px;
+        }
+        .ship{
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <%- include('../layouts/adminheader') %>
+    </header>
+
+    <div class="main">
+
+        <div class="container-content">
+            <a href="/admin/order" class="btn btn-primary mt-5">Go back!</a>
+            <div class="card">
+                <div class="card-header">
+                  Order's ID: <%= order._id %>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Customer' Name: <%= order.customer %></h5>
+                  <p class="card-text">Full Name: <%= order.fullname  %></p>
+                  <p class="card-text">Email: <%= order.email %></p>
+                  <p class="card-text">Address: <%= order.address %></p>
+                  <p class="card-text">City: <%= order.city %></p>
+                  <p class="card-text">country: <%= order.country %></p>
+                  <p class="card-text">Zip-Code: <%= order.zipcode %></p>
+                  <p class="card-text">Phone-number: <%= order.phone %></p>
+                </div>
+            </div>
+            <h4 class="mt-5">Order Products</h4>
+            <table class="table table-striped align-middle tb-p mt-5" id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var [key, order] of Object.entries(order.order)) { %>
+                        <tr>
+                            <td><%= key %></td>
+                            <td><%= order.title %></td>
+                            <td><%= order.qty %></td>
+                            <td class="price"><%= parseFloat(order.price) %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <p>Total: <span id="result"></span>VNĐ</p>
+
+            <a href="" class="btn btn-primary ship">Ship Now!!!</a>
+        </div>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        let container = document.querySelector('.main');
+        let menuToggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        menuToggle.onclick = function(){
+            menuToggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+            container.classList.toggle('active');
+        }
+        document.querySelector('.order-list').classList.add('active');
+
+
+
+        $('.price').each(function() {
+            calculateSum();
+        });
+
+        function calculateSum() {
+
+            var sum = 0;
+            //iterate through each td based on class and add the values
+            $(".price").each(function() {
+
+                var value = $(this).text();
+                    // add only if the value is number
+                if(!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+
+            });
+            $('#result').text(sum);    
+        }
+
+    </script>
+</body>
+</html>

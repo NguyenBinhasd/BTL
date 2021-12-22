@@ -1,0 +1,122 @@
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-right">
+                <% if (user) { %>
+                    <li class="nav-item">
+                        <a href="/user/logout" class="nav-link">Hi, <%= user.username %> <span>-</span> Logout</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a href="/user/login" class="nav-link active">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/user/register" class="nav-link active">Register</a>
+                    </li>
+                <% } %>
+                <% if (user && user.admin == 1) { %>
+                    <li class="nav-item">
+                        <a href="/admin/pages" class="nav-link">Admin Area</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="/" class="logo nav-link">
+                            BTL-PTUD-WEB
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form action="/result" method="get">
+                            <input name="search" class="input" placeholder="Search here">
+                            <button class="search-btn" type="submit" value="search">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+
+                <!-- ACCOUNT -->
+                <div class="col-md-3">
+                    <div class="header-ctn">
+                        <!-- Cart -->
+                        <div class="dropdown">
+                            <a href="/cart/checkout">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Your Cart</span>
+                                <div class="qty">
+                                    <% if (typeof cart !== "undefined") { %>
+                                        <%= cart.length %>
+                                    <% } else { %>
+                                        0
+                                    <% } %>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- /Cart -->
+
+
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <nav class="navbar navbar-expand-sm">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <% pages.forEach(function(page) { %>
+                            <% if (page.slug == 'home') { %>
+                                <li class="nav-item">
+                                    <a href="/" class="nav-link"><%= page.title %></a>
+                                </li>
+                            <% } else { %>
+                                <li class="nav-item">
+                                    <a href="/<%= page.slug %>" class="nav-link"><%= page.title %></a>
+                                </li>
+                            <% } %>
+                        <% }); %>                  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Category
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="/products">All Products</a>
+                              <% categories.forEach(function(cat) { %>
+                                    <a class="dropdown-item" href="/products/<%= cat.slug %>"><%= cat.title %></a>
+                                <% }); %>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/adminheader.css">
+    <title>Admin Area</title>
+</head>
+<body>
+    <header>
+        <%- include('../layouts/adminheader') %>
+    </header>
+
+    <div class="main">
+        <%- messages('messages', locals) %>
+        <% if (errors) {%>
+            <% errors.forEach(function(error) { %>
+                <div class="alert alert-danger">
+                    <%= error.msg %>
+                </div>
+            <% });%>
+        <% }%>
+
+        <div class="container-header">
+            <h2 class="page-title">Products</h2>
+            <a href="/admin/products/add-product" class="btn btn-primary">Add a new Product</a>
+            <br><br>
+        </div>
+
+        <div class="container-product">
+            <% if(count > 0) { %>
+
+                <table class="table table-striped align-middle tb-p">
+                    <!--render từ database ra ở admin-page.js khi thêm dữ liệu ở đấy-->
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                            <th>Product Image</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% products.forEach(function(product) {%>
+                            <tr>
+                                <td><%- product.title %></td>
+                                <td><%- parseFloat(product.price).toFixed(2) %>VNĐ</td>
+                                <td><%- product.category %></td>
+                                <td>
+                                    <% if(product.image == "") { %>  <!--nếu ko upload ảnh trong sản phẩm thì ảnh sản phảm sẽ là noimage như là cái nocover của hako ấy-->
+                                        <img id="noimage" src="/images/noimage.png">
+                                    <% } else { %>
+                                        <img id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
+                                    <% } %>
+                                </td>
+                                <td><a href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
+                                <td><a class="confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+
+            <% } else { %>
+                <h3 class="text-center">There are no product</h3>
+            <% } %>   
+        </div> 
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        let container = document.querySelector('.main');
+        let menuToggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        menuToggle.onclick = function(){
+            menuToggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+            container.classList.toggle('active');
+        }
+        document.querySelector('.p-list').classList.add('active');
+    </script>
+</body>
+</html>

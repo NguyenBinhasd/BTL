@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/adminheader.css">
+    <title>Admin Area</title>
+    <style>
+        .icon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <%- include('../layouts/adminheader') %>
+    </header>
+
+    <div class="main">
+        <div class="container-content">
+
+            <table class="table table-striped align-middle tb-p">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer' Name</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Status</th>
+                        <th>Check Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% order.forEach(function(item) { %>
+                        <tr>
+                            <td><a href="/admin/order/<%= item._id %>">#<%= item._id %></a></td>
+                            <td><%= item.customer %></td>
+                            <td><%= item.fullname %></td>
+                            <td><%= item.email %></td>
+                            <td><%= item.address %></td>
+                            <td><%= item.phone %></td>
+                            <td>Not Delivery</td>
+                            <td><a href="/admin/order/<%= item._id %>" class="btn-btn-primary icon"><i class="far fa-folder-open"></i></a></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        let container = document.querySelector('.main');
+        let menuToggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        menuToggle.onclick = function(){
+            menuToggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+            container.classList.toggle('active');
+        }
+        document.querySelector('.order-list').classList.add('active');
+    </script>
+</body>
+</html>

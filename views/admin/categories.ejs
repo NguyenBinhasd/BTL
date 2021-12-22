@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/adminheader.css">
+    <title>Admin Area</title>
+</head>
+<body>
+    <header>
+        <%- include('../layouts/adminheader') %>
+    </header>
+
+    <div class="main">
+        <%- messages('messages', locals) %>
+        <% if (errors) {%>
+            <% errors.forEach(function(error) { %>
+                <div class="alert alert-danger">
+                    <%= error.msg %>
+                </div>
+            <% });%>
+        <% }%>
+        <div class="container-header">
+            <h2 class="page-title">Categories</h2>
+            <a href="/admin/categories/add-category" class="btn btn-primary">Add a Category</a>
+            <br><br>
+        </div>
+
+
+        <div class="container-content">
+            <% categories.forEach(function(category) {%>
+                <div class="card">
+                    <div class="card-header">
+                      Category
+                        <div class="card-delete">
+                            <a class="confirmDeletion" href="/admin/categories/delete-category/<%= category._id %>"><i class="fas fa-backspace"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%- category.title %></h5>
+                      <a href="/admin/categories/edit-category/<%= category._id %>" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        let container = document.querySelector('.main');
+        let menuToggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        menuToggle.onclick = function(){
+            menuToggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+            container.classList.toggle('active');
+        }
+        document.querySelector('.cat-list').classList.add('active');
+    </script>
+</body>
+</html>

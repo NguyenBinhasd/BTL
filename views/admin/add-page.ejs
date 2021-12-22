@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/adminheader.css">
+    <title>Admin Area</title>
+</head>
+<body>
+    <header>
+        <%- include('../layouts/adminheader') %>
+    </header>
+
+    <div class="main">
+        <%- messages('messages', locals) %>
+        <% if (errors) {%>
+            <% errors.forEach(function(error) { %>
+                <div class="alert alert-danger">
+                    <%= error.msg %>
+                </div>
+            <% });%>
+        <% }%>
+        
+        <div class="container-header">
+            <h2 class="page-title">Add a page</h2>
+            <a href="/admin/pages" class="btn btn-primary">Back to all pages</a>
+            <br>
+        </div>
+        <div class="container-form">
+            <form action="/admin/pages/add-page" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input type="text" class="form-control" name="slug" value="<%= slug %>" placeholder="Slug">
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" class="form-control" id="ta" cols="30" rows="10" placeholder="Content"><%= content %></textarea>
+            </div>
+
+            <button class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+ 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        let container = document.querySelector('.main');
+        let menuToggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        menuToggle.onclick = function(){
+            menuToggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+            container.classList.toggle('active');
+        }
+        document.querySelector('.page-list').classList.add('active');
+    </script>
+</body>
+</html>
